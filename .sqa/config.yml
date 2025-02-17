@@ -1,0 +1,80 @@
+config:
+  credentials: []
+  project_repos:
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: main
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+    github.com/interTwin-eu/DT-Virgo-dags:
+      branch: main
+      repo: https://github.com/interTwin-eu/DT-Virgo-dags/
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      github.com/interTwin-eu/DT-Virgo-dags git:
+        commands:
+        - /usr/bin/env sh .sqa/script.chummy-bistre-okapi.sh
+        container: qc.acc_lousy-pear-seal
+  QC.Doc:
+    repos:
+      github.com/interTwin-eu/DT-Virgo-dags find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.dorky-smalt-angora.sh
+        container: qc.doc_nippy-aquamarine-husky
+      github.com/interTwin-eu/DT-Virgo-dags git:
+        commands:
+        - /usr/bin/env sh .sqa/script.sleazy-cream-mist.sh
+        container: qc.doc_squeaky-seashell-dodo
+      github.com/interTwin-eu/DT-Virgo-dags markdownlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.lousy-cinnamon-kakapo.sh
+        container: qc.doc_messy-harlequin-greyhound
+  QC.Lic:
+    repos:
+      github.com/interTwin-eu/DT-Virgo-dags licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.stealthy-cerulean-badger.sh
+        container: qc.lic_stinky-turquoise-ant
+  QC.Sec:
+    repos:
+      github.com/interTwin-eu/DT-Virgo-dags bandit:
+        commands:
+        - /usr/bin/env sh .sqa/script.queasy-crimson-numbat.sh
+        container: qc.sec_scummy-magnolia-frigatebird
+      github.com/interTwin-eu/DT-Virgo-dags gosec:
+        commands:
+        - /usr/bin/env sh .sqa/script.flabby-ruby-moth.sh
+        container: qc.sec_woozy-maroon-argentino
+  QC.Sty:
+    repos:
+      github.com/interTwin-eu/DT-Virgo-dags flake8:
+        commands:
+        - /usr/bin/env sh .sqa/script.crappy-corn-newt.sh
+        container: qc.sty_nippy-amethyst-macaque
+      github.com/interTwin-eu/DT-Virgo-dags hadolint:
+        commands:
+        - /usr/bin/env sh .sqa/script.greasy-burgundy-terrier.sh
+        container: qc.sty_frumpy-fuchsia-butterfly
+      github.com/interTwin-eu/DT-Virgo-dags jsonlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.freaky-buff-gerbil.sh
+        container: qc.sty_cloudy-goldenrod-mongoose
+      github.com/interTwin-eu/DT-Virgo-dags staticcheck:
+        commands:
+        - /usr/bin/env sh .sqa/script.woozy-brown-emu.sh
+        container: qc.sty_whiny-auburn-cuttlefish
+  QC.Uni:
+    repos:
+      github.com/interTwin-eu/DT-Virgo-dags pytest:
+        commands:
+        - /usr/bin/env sh .sqa/script.silly-zucchini-zonkey.sh
+        container: qc.uni_seedy-gold-dog
+  QC.Ver:
+    repos:
+      github.com/interTwin-eu/DT-Virgo-dags get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.flimsy-firebrick-markhor.sh
+        container: qc.ver_homely-azure-ibis
+timeout: 5400
